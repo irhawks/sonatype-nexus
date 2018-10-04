@@ -33,10 +33,10 @@ nexus:
   auxPorts:
     - name: upload-nexus-docker
       value: 5011
-      domain: upload.nexus.irhawks.com
+      domain: upload.docker.nexus.irhawks.com
     - name: ustc-nexus-docker
       value: 5012
-      domain: docker.mirrors.ustc.edu.cn
+      domain: ustc.docker.nexus.irhawks.com
   serviceType: ClusterIP
   # annotations: {}
   # labels: {}
