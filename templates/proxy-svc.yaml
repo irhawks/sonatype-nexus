@@ -13,10 +13,18 @@ metadata:
 {{- end }}
 spec:
   ports:
-    - name: {{ .Values.nexusProxy.name }}
+    #- name: {{ .Values.nexusProxy.name }}
+    - name: nexus-proxy
       port: {{ .Values.nexusProxy.port }}
       protocol: TCP
       targetPort: {{ .Values.nexusProxy.port }}
+    {{- range .Values.nexus.auxPorts }}
+    - name: {{ .name }}
+      port: {{ .value }}
+      protocol: TCP
+      targetPort: {{ .value }}
+    {{- end }}
+
   selector:
     app: {{ template "nexus.name" . }}
     release: {{ .Release.Name }}

@@ -22,14 +22,26 @@ spec:
       http:
         paths:
           - backend:
-              serviceName: {{ template "nexus.fullname" . }}
+              serviceName: {{ template "nexus.fullname" $ }}
               servicePort: {{ .Values.nexusProxy.port }}
             path: {{ .Values.ingress.path }}
+    {{- range .Values.nexus.auxPorts }}
+    - host: {{ .domain }}
+      http:
+        paths:
+          - backend:
+              serviceName: {{ template "nexus.fullname" $ }}
+              servicePort: {{ .value }}
+            path: {{ $.Values.ingress.path }}
+    {{- end }}
 {{- if .Values.ingress.tls.enabled }}
   tls:
     - hosts:
         - {{ .Values.nexusProxy.env.nexusDockerHost }}
         - {{ .Values.nexusProxy.env.nexusHttpHost }}
+        {{- range .Values.nexus.auxPorts }}
+        - {{ .domain }}
+        {{- end }}
       {{- if .Values.ingress.tls.secretName }}
       secretName: {{ .Values.ingress.tls.secretName | quote }}
       {{- end }}

@@ -30,7 +30,17 @@ nexus:
   # The ports should only be changed if the nexus image uses a different port
   dockerPort: 5003
   nexusPort: 8081
-  serviceType: LoadBalancer
+  auxPorts:
+    - name: gcr-io
+      value: 5011
+      domain: gcr.io
+    - name: k8s-gcr-io
+      value: 5012
+      domain: k8s.gcr.io
+    - name: quay-io
+      value: 5013
+      domain: quay.io
+  serviceType: ClusterIP
   # annotations: {}
   # labels: {}
   # securityContext:
