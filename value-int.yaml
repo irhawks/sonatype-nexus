@@ -31,15 +31,12 @@ nexus:
   dockerPort: 5003
   nexusPort: 8081
   auxPorts:
-    - name: gcr-io
+    - name: upload-nexus-docker
       value: 5011
-      domain: gcr.io
-    - name: k8s-gcr-io
+      domain: upload.nexus.irhawks.com
+    - name: ustc-nexus-docker
       value: 5012
-      domain: k8s.gcr.io
-    - name: quay-io
-      value: 5013
-      domain: quay.io
+      domain: docker.mirrors.ustc.edu.cn
   serviceType: ClusterIP
   # annotations: {}
   # labels: {}
